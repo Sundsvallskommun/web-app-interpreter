@@ -1,0 +1,14 @@
+{
+  "hi": "Hej",
+  "start": "Starta",
+  "quit": "Avsluta",
+  "counterpart": "Motparten",
+
+  "choose_languages": "Innan du börjar väljer du vilka språk du vill använda",
+  "your_language": "Vilket språk vill du använda?",
+  "counterpart_language": "Vilket språk använder motparten?",
+
+  "waiting_for_counterpart": "Väntar på att motparten är färdig",
+  "press_to_paus": "Tryck för att pausa",
+  "press_to_talk": "Tryck för att spela in"
+}
