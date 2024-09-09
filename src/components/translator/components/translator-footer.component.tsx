@@ -2,8 +2,8 @@ import { User } from "@/src/types/user.type";
 import { Button, cx, Icon, useThemeQueries } from "@sk-web-gui/react";
 import { Mic, Pause } from "lucide-react";
 import { useAppStore } from "../../../hooks/appStore";
-import { LanguagePicker } from "../../language-picker/language-picker.component";
 import { useAutoTranslation } from "../../../hooks/useAutoTranslation.hook";
+import { LanguagePicker } from "../../language-picker/language-picker.component";
 
 interface TranslatorFooterProps {
   user: User;

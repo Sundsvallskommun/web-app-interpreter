@@ -1,9 +1,15 @@
 import { TypingSequence } from "@sk-web-gui/ai";
 
-export const LoadingScreen: React.FC = () => {
+interface LoadingScreenProps {
+  text?: string;
+}
+
+export const LoadingScreen: React.FC<LoadingScreenProps> = ({
+  text = "Laddar den digitala tolken",
+}) => {
   return (
-    <div className="h-screen w-full flex flex-row justify-center items-center font-display gap-8">
-      <h1>Laddar den digitala tolken</h1>
+    <div className="h-full w-full flex flex-row justify-center items-center font-display gap-8">
+      <h1>{text}</h1>
       <TypingSequence />
     </div>
   );

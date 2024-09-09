@@ -7,6 +7,7 @@ interface LanguagePickerProps {
   value: string;
   rotate?: boolean;
   size?: "sm" | "md" | "lg";
+  disabled?: boolean;
 }
 
 export const LanguagePicker: React.FC<LanguagePickerProps> = ({
@@ -14,6 +15,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
   onSelect,
   rotate,
   size = "md",
+  disabled,
 }) => {
   const handleSelect = (event: ChangeEvent<HTMLInputElement>) => {
     onSelect(event.target.value);
@@ -39,6 +41,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
           : "max-w-fill md:max-w-fucll"
       )}
       size={size}
+      disabled={disabled}
     >
       <Combobox.Input
         className={cx(
@@ -48,6 +51,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
         )}
         readOnly
         value={allLanguages.find((lng) => lng.code === value)?.name}
+        disabled={disabled}
       />
       <Combobox.List
         className={cx(
