@@ -1,14 +1,15 @@
 {
+  "digital_interpreter": "Digital interpreter",
   "hi": "Hi",
   "start": "Start",
   "quit": "Quit",
   "counterpart": "Counterpart",
 
-  "choose_languages": "Innan du börjar väljer du vilka språk du vill använda",
-  "your_language": "Vilket språk vill du använda?",
-  "counterpart_language": "Vilket språk använder motparten?",
+  "choose_languages": "Before we start, pick your languages",
+  "your_language": "What language do you want to use?",
+  "counterpart_language": "What language does your counterpart use?",
 
   "waiting_for_counterpart": "Waiting for counterpart",
-  "press_to_paus": "Press to paus",
-  "press_to_talk": "Press to talk"
+  "press_to_paus": "Tap to paus",
+  "press_to_talk": "Tap to talk"
 }

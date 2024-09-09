@@ -47,6 +47,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
             : "max-w-fill md:max-w-full"
         )}
         readOnly
+        value={allLanguages.find((lng) => lng.code === value)?.name}
       />
       <Combobox.List
         className={cx(
@@ -57,7 +58,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
       >
         {languages.suggested.map((language) => (
           <Combobox.Option
-            key={language.code + "ost"}
+            key={language.code + "preferred"}
             value={language.code}
             checked={value === language.code}
           >

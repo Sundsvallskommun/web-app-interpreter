@@ -23,8 +23,8 @@ export const TranslatorEntry: React.FC<TranslatorEntryProps> = ({
   return (
     <div
       className={cx(
-        "flex rounded-button gap-40 p-16",
-        "max-w-[85%]",
+        "flex rounded-button gap-20 md:gap-40 p-12 p-16",
+        "max-w-full md:max-w-[85%]",
         entry.origin === 1
           ? "bg-background-200"
           : "bg-bjornstigen-background-100"

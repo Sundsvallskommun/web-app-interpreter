@@ -5,6 +5,7 @@ import { useAppStore } from "../../hooks/appStore";
 import { TranslatorFooter } from "./components/translator-footer.component";
 import { TranslatorEntry } from "./components/translator-entry.component";
 import { cx } from "@sk-web-gui/react";
+import { getTranslation } from "../../services/azure.service";
 
 interface TranslatorProps {
   id: 1 | 2;
@@ -75,13 +76,40 @@ export const Translator: React.FC<TranslatorProps> = ({ id, onRestart }) => {
     }
   }, [history, scrollRef]);
 
+  useEffect(() => {
+    const translatedHistory = history[id].filter(
+      (entry) => entry.origin === otherId
+    );
+    if (translatedHistory?.length > 0) {
+      for (let index = 0; index < translatedHistory.length; index++) {
+        if (translatedHistory[0].language !== sourcelang) {
+          getTranslation({
+            text: [translatedHistory[index].text],
+            sourcelanguage: translatedHistory[0].language,
+            targetlanguage: sourcelang,
+          }).then((res) => {
+            if (res[0] !== translatedHistory[index].text) {
+              updateHistory(
+                id,
+                otherId,
+                sourcelang,
+                res[0],
+                translatedHistory[index].id
+              );
+            }
+          });
+        }
+      }
+    }
+  }, [sourcelang]);
+
   return (
     <div
       className="w-full h-full flex flex-col gap-0 rounded-cards shadow-100"
       style={{ transform: id === 2 ? "rotate(180deg)" : undefined }}
     >
       <ul
-        className="grow mt-24 pl-24 pr-40 overflow-y-auto flex flex-col gap-24 pb-24"
+        className="grow mt-12 md:mt-24 pl-12 md:pl-24 pr-24 md:pr-40 overflow-y-auto flex flex-col gap-12 md:gap-24 pb-12 md:pb-24"
         ref={scrollRef}
       >
         {history[id].map((entry, index) => (
