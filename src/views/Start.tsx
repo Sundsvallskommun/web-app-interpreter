@@ -7,10 +7,11 @@ import {
   Icon,
 } from "@sk-web-gui/react";
 import { ArrowRight } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { Card } from "../components/card/card.component";
 import { LanguagePicker } from "../components/language-picker/language-picker.component";
 import { useAppStore } from "../hooks/appStore";
+import { useAutoTranslation } from "../hooks/useAutoTranslation.hook";
+import { useEffect } from "react";
 
 interface StartProps {
   onNext: () => void;
@@ -21,12 +22,18 @@ export const Start: React.FC<StartProps> = ({ onNext }) => {
     state.languages,
     state.setLanguage,
   ]);
-  const { t } = useTranslation();
+
+  const myLanguage = languages[1].split("-")[0];
+  const { t, i18n } = useAutoTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(myLanguage);
+  }, [myLanguage, i18n]);
 
   return (
     <div className="w-full h-screen flex flex-col p-0 m-0 items-center">
       <Header
-        title="Digital tolk"
+        title={t("common:digital_interpreter")}
         wrapperClasses="py-12 w-full"
         className="max-w-content"
       ></Header>

@@ -1,9 +1,9 @@
 import { User } from "@/src/types/user.type";
 import { Button, cx, Icon, useThemeQueries } from "@sk-web-gui/react";
 import { Mic, Pause } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { useAppStore } from "../../../hooks/appStore";
 import { LanguagePicker } from "../../language-picker/language-picker.component";
+import { useAutoTranslation } from "../../../hooks/useAutoTranslation.hook";
 
 interface TranslatorFooterProps {
   user: User;
@@ -27,7 +27,7 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
     state.setLanguage,
   ]);
 
-  const { t } = useTranslation("translation", { lng: language });
+  const { t } = useAutoTranslation("common", { lng: language });
 
   const { isMaxSmallDevice } = useThemeQueries();
 
@@ -44,7 +44,7 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
     >
       <div
         className={cx(
-          "flex md:hidden w-full grow flex-col justify-center items-center gap-8 text-center"
+          "flex md:hidden w-full grow flex-col justify-center items-center gap-4 text-center"
         )}
       >
         <Button
@@ -60,7 +60,7 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
         >
           <Icon icon={listening ? <Pause /> : <Mic />} />
         </Button>
-        <span className="text-base text-body">
+        <span className="text-small text-body">
           {busy
             ? t("common:waiting_for_counterpart")
             : listening
