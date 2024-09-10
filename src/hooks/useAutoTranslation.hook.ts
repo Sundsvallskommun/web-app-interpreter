@@ -28,24 +28,29 @@ export const useAutoTranslation = <
       const namespaces = Object.keys(i18n.getDataByLanguage("en"));
 
       for (let index = 0; index < namespaces.length; index++) {
-        const namespace = i18n.getResourceBundle("en", namespaces[index]);
+        if (!i18n.getResourceBundle(language, namespaces[index])) {
+          const namespace = i18n.getResourceBundle("en", namespaces[index]);
 
-        getTranslation({
-          text: Object.values(namespace),
-          sourcelanguage: "en",
-          targetlanguage: language,
-        })
-          .then((res) => {
-            setReady(false);
-            const newLanguage = res.reduce((newNamespace, text, index) => {
-              return { ...newNamespace, [Object.keys(namespace)[index]]: text };
-            }, {});
-            i18n.addResourceBundle(language, namespaces[index], newLanguage);
-            setReady(true);
+          getTranslation({
+            text: Object.values(namespace),
+            sourcelanguage: "en",
+            targetlanguage: language,
           })
-          .catch((e) => {
-            console.log("error: ", e);
-          });
+            .then((res) => {
+              setReady(false);
+              const newLanguage = res.reduce((newNamespace, text, index) => {
+                return {
+                  ...newNamespace,
+                  [Object.keys(namespace)[index]]: text,
+                };
+              }, {});
+              i18n.addResourceBundle(language, namespaces[index], newLanguage);
+              setReady(true);
+            })
+            .catch((e) => {
+              console.log("error: ", e);
+            });
+        }
       }
     }
   }, [i18n, language]);

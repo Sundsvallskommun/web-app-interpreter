@@ -39,13 +39,14 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
   return (
     <footer
       className={cx(
-        "flex-wrap md:flex-nowrap justify-center md:justify-between w-full grow-0 gap-16 shrink-0 rounded-b-cards flex  items-end pt-16 pb-24 px-24 border-t-divider border-t-1"
+        "flex-wrap md:flex-nowrap justify-between md:justify-between w-full grow-0 gap-16 shrink-0 rounded-b-cards flex  items-end pt-16 pb-24 px-24 border-t-divider border-t-1"
       )}
     >
       <div
         className={cx(
-          "flex md:hidden w-full grow flex-col justify-center items-center gap-4 text-center"
+          "flex md:hidden w-full grow flex-row justify-center items-center gap-4 text-center"
         )}
+        onClick={() => !busy && onClick()}
       >
         <Button
           size={isMaxSmallDevice ? "md" : "lg"}
@@ -68,7 +69,7 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
             : t("common:press_to_talk")}
         </span>
       </div>
-      <div className="w-[12em] flex justify-center md:justify-start">
+      <div className="w-auto max-md:grow md:w-[12em] flex justify-center md:justify-start">
         <LanguagePicker
           value={sourcelang}
           onSelect={handleSelect}
@@ -105,7 +106,7 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
       <div
         className={cx(
           user !== 1 && isMaxSmallDevice ? "hidden" : "flex",
-          "w-[12em] justify-center md:justify-end"
+          "w-auto max-md:grow md:w-[12em] justify-center md:justify-end"
         )}
       >
         {user === 1 && (

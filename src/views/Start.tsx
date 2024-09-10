@@ -21,7 +21,7 @@ export const Start: React.FC<StartProps> = ({ onNext }) => {
 
   return (
     <div className="w-full h-screen max-h-screen flex flex-col p-0 m-0 items-center">
-      <main className="max-w-content w-full h-full flex flex-col  gap-40 px-24 md:px-40 py-40 items-center">
+      <main className="max-w-content w-full h-full flex flex-col gap-24 md:gap-40 px-24 md:px-40 py-16 md:py-32 items-center">
         <div className="h-1/2 w-full rotate-180">
           <Suspense fallback={<LoadingScreen />}>
             <ChooseLanguage

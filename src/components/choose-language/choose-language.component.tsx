@@ -1,9 +1,11 @@
 import {
   Avatar,
   Button,
+  cx,
   FormControl,
   FormLabel,
   Icon,
+  useThemeQueries,
 } from "@sk-web-gui/react";
 import { ArrowRight, Check } from "lucide-react";
 import { useAppStore } from "../../hooks/appStore";
@@ -27,13 +29,15 @@ export const ChooseLanguage: React.FC<ChooseLanguageProps> = ({
     state.setLanguage,
   ]);
 
+  const { isMaxPhone } = useThemeQueries();
+
   const myLanguage = languages[user].split("-")[0];
 
   const { t } = useAutoTranslation("common", { lng: myLanguage });
 
   return (
-    <div className="w-full h-full flex flex-col justify-between">
-      <header className="w-full flex flex-col items-center gap-8 md:gap-40 text-center">
+    <div className="w-full h-full flex flex-col justify-between items-center gap-8">
+      <header className="w-full flex flex-col items-center gap-8 sm:gap-16 md:gap-32 text-center">
         <h1 className="text-display-2-sm md:text-display-2-md xl:text-display-2-lg font-display">
           {t("common:hi")}
         </h1>
@@ -41,16 +45,21 @@ export const ChooseLanguage: React.FC<ChooseLanguageProps> = ({
           {t("common:choose_language")}
         </span>
       </header>
-      <div className="flex gap-40 flex-wrap items-center w-full">
-        <Card className="bg-bjornstigen-background-100 grow shrink">
-          <div>
+      <div className="flex justify-center w-full">
+        <Card
+          className={cx(
+            "shrink w-[27em]",
+            user === 1 ? "bg-bjornstigen-background-100" : "bg-background-200"
+          )}
+        >
+          <div className="hidden sm:block">
             <Avatar
               initials={user === 1 ? "A" : "B"}
               color={user === 1 ? "bjornstigen" : "primary"}
               rounded
             />
           </div>
-          <FormControl className="max-w-full pr-32">
+          <FormControl className="max-w-full">
             <FormLabel>{t("common:your_language")}</FormLabel>
             <LanguagePicker
               value={languages[user]}
@@ -62,7 +71,7 @@ export const ChooseLanguage: React.FC<ChooseLanguageProps> = ({
       </div>
       <div className="w-full flex flex-col items-end gap-8">
         <Button
-          size="lg"
+          size={isMaxPhone ? "md" : "lg"}
           variant="primary"
           color={ready ? "success" : "vattjom"}
           aria-describedby={`ready-btn-desc-${user}`}
