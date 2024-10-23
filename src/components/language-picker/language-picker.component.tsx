@@ -33,25 +33,20 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
     <Combobox
       multiple={false}
       onChange={(e) => handleSelect(e)}
-      className={cx(
-        rotate
-          ? "max-w-[10em] md:max-w-[12em] rotate-180"
-          : "max-w-fill md:max-w-fucll"
-      )}
+      className={cx(rotate ? "rotate-180" : "", "w-full")}
       size={size}
     >
       <Combobox.Input
         className={cx(
-          rotate
-            ? "max-w-[10em] md:max-w-[12em] rotate-180"
-            : "max-w-fill md:max-w-full"
+          rotate ? "max-w-[10em] md:max-w-[12em] rotate-180" : "",
+          "w-full"
         )}
         readOnly
         value={allLanguages.find((lng) => lng.code === value)?.name}
       />
       <Combobox.List
         className={cx(
-          "max-w-[75vw] md:max-w-[20em] max-sm:right-[0]",
+          "w-full",
           rotate ? "rotate-180 right-0 mr-[-50%] md:mr-[0]" : ""
         )}
         size="lg"

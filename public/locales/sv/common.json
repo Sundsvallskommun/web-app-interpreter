@@ -1,15 +1,19 @@
 {
-  "digital_interpreter": "Digital tolk",
+  "digital_interpreter": "Digital Tolk",
   "hi": "Hej",
   "start": "Starta",
   "quit": "Avsluta",
   "counterpart": "Motparten",
 
-  "choose_languages": "Innan du börjar väljer du vilka språk du vill använda",
-  "your_language": "Vilket språk vill du använda?",
+  "choose_languages": "Innan du börjar väljer du vilket språk du vill använda",
+  "person_a": "Person A",
+  "person_b": "Person B",
   "counterpart_language": "Vilket språk använder motparten?",
 
   "waiting_for_counterpart": "Väntar på att motparten är färdig",
   "press_to_paus": "Tryck för att pausa",
-  "press_to_talk": "Tryck för att spela in"
+  "press_to_talk": "Tryck för att spela in",
+
+  "warning_headline": "Varning",
+  "warning_text": "Under mötet, nämn inga personliga uppgifter om dig själv eller någon i din närhet."
 }

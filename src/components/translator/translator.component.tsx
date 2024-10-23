@@ -105,7 +105,7 @@ export const Translator: React.FC<TranslatorProps> = ({ id, onRestart }) => {
 
   return (
     <div
-      className="w-full h-full flex flex-col gap-0 rounded-cards shadow-100"
+      className="w-full h-full flex flex-col gap-0 shadow-100"
       style={{ transform: id === 2 ? "rotate(180deg)" : undefined }}
     >
       <ul
