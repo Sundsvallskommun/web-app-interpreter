@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { type InterpreterHistory } from "../types/interpreter.type";
 import { type User } from "../types/user.type";
 
-type UserLanguage = Record<User, string>;
+export type UserLanguage = Record<User, string>;
 
 interface AppStore {
   languages: UserLanguage;

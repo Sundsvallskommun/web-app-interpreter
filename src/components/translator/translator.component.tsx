@@ -6,6 +6,7 @@ import { TranslatorFooter } from "./components/translator-footer.component";
 import { TranslatorEntry } from "./components/translator-entry.component";
 import { cx } from "@sk-web-gui/react";
 import { getTranslation } from "../../services/azure.service";
+import { TranslatorRecording } from "./components/translator-recording.component";
 
 interface TranslatorProps {
   id: 1 | 2;
@@ -29,46 +30,31 @@ export const Translator: React.FC<TranslatorProps> = ({ id, onRestart }) => {
 
   const scrollRef = useRef<HTMLUListElement>(null);
 
-  const { transcript, translation, done, reset, start, stop, listening } =
+  const { transcript, translation, done, reset, start, listening } =
     useSpeechToTextTranslation(sourcelang, targetlang, false);
 
   const [messageId, setMessageId] = useState<string>(randomUUID());
 
-  useEffect(() => {
-    if (transcript) {
-      updateHistory(id, id, languages[id], transcript, messageId);
-      if (!translation) {
-        updateHistory(otherId, id, languages[otherId], "", messageId);
-      }
-    }
-  }, [transcript]);
+  // useEffect(() => {
+  //   if (transcript) {
+  //     updateHistory(id, id, languages[id], transcript, messageId);
+  //     if (!translation) {
+  //       updateHistory(otherId, id, languages[otherId], "", messageId);
+  //     }
+  //   }
+  // }, [transcript]);
 
   useEffect(() => {
-    if (translation) {
-      updateHistory(otherId, id, languages[otherId], translation, messageId);
-    }
-  }, [translation]);
-
-  useEffect(() => {
-    if (done && !listening) {
-      reset();
-      setMessageId(randomUUID());
-    }
-  }, [done, listening]);
-
-  useEffect(() => {
-    if (listening && !busy[id]) {
+    if ((listening && !busy[id]) || (transcript.length > 0 && !busy[id])) {
       setBusy(id, true);
-    } else if (!listening && busy[id]) {
-      setBusy(id, false);
     }
   }, [listening]);
 
-  useEffect(() => {
-    if (listening && !busy[id]) {
-      stop();
-    }
-  }, [busy]);
+  // useEffect(() => {
+  //   if (listening && !busy[id]) {
+  //     stop();
+  //   }
+  // }, [busy]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -128,9 +114,29 @@ export const Translator: React.FC<TranslatorProps> = ({ id, onRestart }) => {
           </li>
         ))}
       </ul>
+      {transcript.length > 0 ? (
+        <TranslatorRecording
+          transcript={transcript}
+          setMessageId={setMessageId}
+          updateHistory={updateHistory}
+          otherId={otherId}
+          id={id}
+          languages={languages}
+          translation={translation}
+          messageId={messageId}
+          done={done}
+          reset={reset}
+          listening={listening}
+          setBusy={setBusy}
+        />
+      ) : (
+        <></>
+      )}
+
       <TranslatorFooter
         user={id}
-        onClick={() => (listening ? stop() : start())}
+        transcript={transcript}
+        onClick={() => start()}
         listening={listening}
         busy={busy[otherId]}
         onRestart={onRestart}
