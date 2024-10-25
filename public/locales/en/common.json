@@ -6,10 +6,14 @@
   "counterpart": "Counterpart",
 
   "choose_languages": "Before we start, pick your languages",
-  "your_language": "What language do you want to use?",
+  "person_a": "Person A",
+  "person_b": "Person B",
   "counterpart_language": "What language does your counterpart use?",
 
   "waiting_for_counterpart": "Waiting for counterpart",
   "press_to_paus": "Tap to paus",
-  "press_to_talk": "Tap to talk"
+  "press_to_talk": "Tap to talk",
+
+  "warning_headline": "Warning",
+  "warning_text": " During the meeting, do not mention any personal information about yourself or anyone close to you."
 }

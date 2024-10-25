@@ -3,7 +3,7 @@ import {
   FormControl,
   FormLabel,
   Header,
-  LucideIcon as Icon,
+  Icon,
 } from "@sk-web-gui/react";
 import { ArrowRight } from "lucide-react";
 import { LanguagePicker } from "../components/language-picker/language-picker.component";
@@ -60,8 +60,8 @@ export const Start: React.FC<StartProps> = ({ onNext }) => {
               {t("common:person_b")}
             </FormLabel>
             <LanguagePicker
-              value={languages[1]}
-              onSelect={(value) => setLanguage(1, value)}
+              value={languages[2]}
+              onSelect={(value) => setLanguage(2, value)}
             />
           </FormControl>
           {/* <Card className="bg-bjornstigen-background-100 grow shrink">

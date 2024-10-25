@@ -7,6 +7,8 @@ import { Dispatch, SetStateAction } from "react";
 import { v4 as randomUUID } from "uuid";
 
 interface TranslatorRecordningProps {
+  stop: () => void;
+  start: () => void;
   transcript: string;
   setMessageId: Dispatch<SetStateAction<string>>;
   updateHistory: (
@@ -28,6 +30,8 @@ interface TranslatorRecordningProps {
 }
 
 export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
+  start,
+  stop,
   transcript,
   setMessageId,
   updateHistory,
@@ -41,18 +45,6 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
   listening,
   setBusy,
 }) => {
-  // useEffect(() => {
-  //     if (translation) {
-  //       updateHistory(otherId, id, languages[otherId], translation, messageId);
-  //     }
-  //   }, [translation]);
-
-  //   useEffect(() => {
-  //     if (done && !listening) {
-  //       reset();
-  //       setMessageId(randomUUID());
-  //     }
-  //   }, [done, listening]);
   const sendEntry = () => {
     if (transcript) {
       updateHistory(id, id, languages[id], transcript, messageId);
@@ -63,20 +55,24 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
         updateHistory(otherId, id, languages[otherId], translation, messageId);
       }
       if (done && !listening) {
+        stop();
         reset();
         setMessageId(randomUUID());
         setBusy(id, false);
       }
     }
   };
+
   return (
-    <div className="z-popover flex justify-center pb-24">
-      <div className="max-w-[770px] w-full p-16 rounded-button shadow-50 flex flex-col gap-24">
+    <div className="absolute z-20 flex justify-center pb-100 !bg-transparent w-full bottom-0">
+      <div className="max-w-[770px] w-full h-fit p-16 mb-40 rounded-button shadow-50 flex flex-col gap-24">
         <div className="flex justify-between gap-12">
-          <div className="">
+          <div>
             <Button
               variant="tertiary"
-              onClick={() => textToSpeech(transcript)}
+              onClick={() =>
+                textToSpeech(transcript, { language: languages[id] })
+              }
               iconButton
             >
               <Icon icon={<Volume2 />} />
@@ -88,15 +84,34 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
             <></>
           )}
 
-          <div className="">
-            <Button variant="ghost" iconButton>
+          <div>
+            <Button
+              onClick={() => {
+                stop();
+                reset();
+                setMessageId(randomUUID());
+                setBusy(id, false);
+              }}
+              variant="ghost"
+              iconButton
+            >
               <Icon icon={<X />} />
             </Button>
           </div>
         </div>
         <div className="px-40 w-full flex flex-col gap-24">
           <div className="w-full flex justify-center">
-            <Button className="w-fit" variant="tertiary">
+            <Button
+              onClick={() => {
+                stop();
+                reset();
+                setMessageId(randomUUID());
+                start();
+              }}
+              className="w-fit"
+              variant="tertiary"
+              disabled={transcript.length === 0}
+            >
               Börja om inspelningen
             </Button>
           </div>

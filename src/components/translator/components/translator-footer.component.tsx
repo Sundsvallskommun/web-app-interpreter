@@ -107,8 +107,6 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
         <span className="text-base text-body">
           {busy
             ? t("common:waiting_for_counterpart")
-            : listening
-            ? t("common:press_to_paus")
             : t("common:press_to_talk")}
         </span>
       </div>

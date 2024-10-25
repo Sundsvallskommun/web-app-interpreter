@@ -1,6 +1,6 @@
 import { InterpreterEntry } from "@/src/types/interpreter.type";
 import { User } from "@/src/types/user.type";
-import { textToSpeech, TypingBubble } from "@sk-web-gui/ai";
+import { textToSpeech } from "@sk-web-gui/ai";
 import { Avatar, Button, cx, Icon } from "@sk-web-gui/react";
 import { useTranslation } from "react-i18next";
 import { Volume2 } from "lucide-react";
@@ -14,7 +14,6 @@ interface TranslatorEntryProps {
 export const TranslatorEntry: React.FC<TranslatorEntryProps> = ({
   entry,
   user,
-  last,
 }) => {
   const { t } = useTranslation("translation", {
     lng: entry.language.split("-")[0],
@@ -23,28 +22,31 @@ export const TranslatorEntry: React.FC<TranslatorEntryProps> = ({
   return (
     <div
       className={cx(
-        "flex rounded-button gap-20 md:gap-40 p-12 p-16",
-        "max-w-full md:max-w-[85%]",
-        entry.origin === 1
-          ? "bg-background-200"
-          : "bg-bjornstigen-background-100"
+        "flex rounded-button gap-20 md:gap-40 p-12  shadow-50",
+        "max-w-full md:max-w-[85%]"
       )}
     >
       <div className="flex gap-16">
-        {user !== entry.origin && (
-          <div>
-            <Avatar
-              color={entry.origin === 1 ? "primary" : "bjornstigen"}
-              initials={t("common:counterpart").charAt(0)}
-              rounded
-              size="md"
-            />
-          </div>
-        )}
+        <div>
+          <Avatar
+            color={entry.origin === 1 ? "vattjom" : "juniskar"}
+            initials={entry.origin === 1 ? "A" : "B"}
+            rounded
+            size="md"
+          />
+        </div>
         <div className="flex flex-col gap-6">
-          {user !== entry.origin && <small>{t("common:counterpart")}</small>}
+          {entry.origin === 1 ? (
+            <p className="font-bold text-vattjom-text">
+              {t("common:person_a")}
+            </p>
+          ) : (
+            <p className="font-bold text-juniskar-text">
+              {t("common:person_b")}
+            </p>
+          )}
           {entry.text}
-          {last && !entry.text && <TypingBubble />}
+          {/* {(listening || transcript) && !entry.text && <TypingBubble />} */}
         </div>
         {user !== entry.origin && (
           <div>
