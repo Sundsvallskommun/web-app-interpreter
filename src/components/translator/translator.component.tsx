@@ -36,26 +36,11 @@ export const Translator: React.FC<TranslatorProps> = ({ id, onRestart }) => {
 
   const [messageId, setMessageId] = useState<string>(randomUUID());
 
-  // useEffect(() => {
-  //   if (transcript) {
-  //     updateHistory(id, id, languages[id], transcript, messageId);
-  //     if (!translation) {
-  //       updateHistory(otherId, id, languages[otherId], "", messageId);
-  //     }
-  //   }
-  // }, [transcript]);
-
   useEffect(() => {
     if ((listening && !busy[id]) || (transcript.length > 0 && !busy[id])) {
       setBusy(id, true);
     }
   }, [listening]);
-
-  // useEffect(() => {
-  //   if (listening && !busy[id]) {
-  //     stop();
-  //   }
-  // }, [busy]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -95,8 +80,17 @@ export const Translator: React.FC<TranslatorProps> = ({ id, onRestart }) => {
       className="w-full h-full flex flex-col relative gap-0 shadow-100"
       style={{ transform: id === 2 ? "rotate(180deg)" : undefined }}
     >
+      <div className="flex justify-end mt-24 pl-12 md:pl-24 pr-24 md:pr-40">
+        <span
+          className={`text-large font-bold ${
+            id === 1 ? "text-vattjom-text" : "text-juniskar-text"
+          }`}
+        >
+          {id === 1 ? t("common:person_a") : t("common:person_b")}
+        </span>
+      </div>
       <ul
-        className="grow mt-12 md:mt-24 pl-12 md:pl-24 pr-24 md:pr-40 overflow-y-auto flex flex-col gap-12 md:gap-24 pb-12 md:pb-24 pt-4+"
+        className="grow mt-12 pl-12 md:pl-24 pr-24 md:pr-40 overflow-y-auto flex flex-col gap-12 md:gap-24 pb-12 md:pb-24 pt-4"
         ref={scrollRef}
       >
         {busy[otherId] ? (

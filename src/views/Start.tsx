@@ -64,35 +64,6 @@ export const Start: React.FC<StartProps> = ({ onNext }) => {
               onSelect={(value) => setLanguage(2, value)}
             />
           </FormControl>
-          {/* <Card className="bg-bjornstigen-background-100 grow shrink">
-            <div>
-              <Avatar initials="A" color="bjornstigen" rounded />
-            </div>
-            <FormControl className="max-w-full pr-32">
-              <FormLabel>{t("common:your_language")}</FormLabel>
-              <LanguagePicker
-                value={languages[1]}
-                onSelect={(value) => setLanguage(1, value)}
-              />
-            </FormControl>
-          </Card>
-          <Card className="bg-background-200 grow shrink">
-            <div>
-              <Avatar
-                initials="B"
-                className="text-light-primary bg-primary-surface "
-                color="primary"
-                rounded
-              />
-            </div>
-            <FormControl className="max-w-full pr-32">
-              <FormLabel>{t("common:counterpart_language")}</FormLabel>
-              <LanguagePicker
-                value={languages[2]}
-                onSelect={(value) => setLanguage(2, value)}
-              />
-            </FormControl>
-          </Card> */}
         </div>
         <div className="flex flex-col xs:gap-40 sm:gap-72">
           <Button

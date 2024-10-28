@@ -46,7 +46,6 @@ export const TranslatorEntry: React.FC<TranslatorEntryProps> = ({
             </p>
           )}
           {entry.text}
-          {/* {(listening || transcript) && !entry.text && <TypingBubble />} */}
         </div>
         {user !== entry.origin && (
           <div>
