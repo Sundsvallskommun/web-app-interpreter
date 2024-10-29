@@ -65,7 +65,7 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
 
   return (
     <div className="absolute z-20 flex justify-center pb-100 !bg-transparent w-full bottom-0">
-      <div className="max-w-[770px] w-full h-fit p-16 mb-40 rounded-button shadow-50 flex flex-col gap-24">
+      <div className="max-w-[770px] w-full h-fit p-16 mb-40 bg-white rounded-button shadow-50 flex flex-col gap-24">
         <div className="flex justify-between gap-12">
           <div>
             <Button
@@ -122,7 +122,7 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
               onClick={sendEntry}
               className="w-full"
               variant="primary"
-              color="vattjom"
+              color={id === 1 ? "vattjom" : "juniskar"}
             >
               Skicka
             </Button>

@@ -7,7 +7,7 @@ import { TranslatorEntry } from "./components/translator-entry.component";
 import { Avatar, cx } from "@sk-web-gui/react";
 import { getTranslation } from "../../services/azure.service";
 import { TranslatorRecording } from "./components/translator-recording.component";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface TranslatorProps {
   id: 1 | 2;
@@ -28,6 +28,10 @@ export const Translator: React.FC<TranslatorProps> = ({ id, onRestart }) => {
   const otherId = id === 1 ? 2 : 1;
   const sourcelang = languages[id];
   const targetlang = languages[otherId].split("-")[0];
+
+  const { t } = useTranslation("translation", {
+    lng: id === 1 ? languages[1].split("-")[0] : languages[2].split("-")[0],
+  });
 
   const scrollRef = useRef<HTMLUListElement>(null);
 
