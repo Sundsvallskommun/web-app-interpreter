@@ -80,6 +80,7 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
           onSelect={handleSelect}
           rotate
           size={isMaxSmallDevice ? "sm" : "md"}
+          readOnly={true}
         />
       </div>
       <div

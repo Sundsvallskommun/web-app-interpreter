@@ -1,5 +1,5 @@
 import { Combobox, cx } from "@sk-web-gui/react";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import languages from "../../assets/languagesbcp.json";
 
 interface LanguagePickerProps {
@@ -7,14 +7,17 @@ interface LanguagePickerProps {
   value: string;
   rotate?: boolean;
   size?: "sm" | "md" | "lg";
+  readOnly?: boolean;
 }
 
 export const LanguagePicker: React.FC<LanguagePickerProps> = ({
-  value,
+  value: _value,
+  readOnly,
   onSelect,
   rotate,
   size = "md",
 }) => {
+  const [value] = useState<string>(_value);
   const handleSelect = (event: ChangeEvent<HTMLInputElement>) => {
     onSelect(event.target.value);
   };
@@ -29,6 +32,8 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
     ),
   ];
 
+  console.log("lang", allLanguages.find((lng) => lng.code === value)?.name);
+
   return (
     <Combobox
       multiple={false}
@@ -41,14 +46,21 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
           "w-full",
           rotate ? "rotate-180 right-0 mr-[-50%] md:mr-[0]" : ""
         )}
-        value={allLanguages.find((lng) => lng.code === value)?.name}
+        value={value}
+        readOnly={readOnly}
       />
-      <Combobox.List className="w-full" size="lg">
+      <Combobox.List
+        className={cx(
+          "w-full",
+          rotate ? "rotate-180 right-0 mr-[-50%] md:mr-[0]" : ""
+        )}
+        size="lg"
+      >
         {languages.suggested.map((language) => (
           <Combobox.Option
             key={language.code + "preferred"}
             value={language.code}
-            checked={value === language.code}
+            defaultChecked={value === language.code}
           >
             {language.name}
           </Combobox.Option>
@@ -58,7 +70,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
           <Combobox.Option
             key={language.code}
             value={language.code}
-            checked={value === language.code}
+            defaultChecked={value === language.code}
           >
             {language.name}
           </Combobox.Option>
