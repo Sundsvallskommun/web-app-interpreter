@@ -1,5 +1,5 @@
 import { Combobox, cx } from "@sk-web-gui/react";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import languages from "../../assets/languagesbcp.json";
 
 interface LanguagePickerProps {
@@ -7,14 +7,17 @@ interface LanguagePickerProps {
   value: string;
   rotate?: boolean;
   size?: "sm" | "md" | "lg";
+  readOnly?: boolean;
 }
 
 export const LanguagePicker: React.FC<LanguagePickerProps> = ({
-  value,
+  value: _value,
+  readOnly,
   onSelect,
   rotate,
   size = "md",
 }) => {
+  const [value] = useState<string>(_value);
   const handleSelect = (event: ChangeEvent<HTMLInputElement>) => {
     onSelect(event.target.value);
   };
@@ -29,29 +32,26 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
     ),
   ];
 
+  console.log("lang", allLanguages.find((lng) => lng.code === value)?.name);
+
   return (
     <Combobox
       multiple={false}
-      onChange={(e) => handleSelect(e)}
-      className={cx(
-        rotate
-          ? "max-w-[10em] md:max-w-[12em] rotate-180"
-          : "max-w-fill md:max-w-fucll"
-      )}
+      onChange={handleSelect}
+      className={cx(rotate ? "rotate-180" : "", "w-full")}
       size={size}
     >
       <Combobox.Input
         className={cx(
-          rotate
-            ? "max-w-[10em] md:max-w-[12em] rotate-180"
-            : "max-w-fill md:max-w-full"
+          "w-full",
+          rotate ? "rotate-180 right-0 mr-[-50%] md:mr-[0]" : ""
         )}
-        readOnly
-        value={allLanguages.find((lng) => lng.code === value)?.name}
+        value={value}
+        readOnly={readOnly}
       />
       <Combobox.List
         className={cx(
-          "max-w-[75vw] md:max-w-[20em] max-sm:right-[0]",
+          "w-full",
           rotate ? "rotate-180 right-0 mr-[-50%] md:mr-[0]" : ""
         )}
         size="lg"
@@ -60,7 +60,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
           <Combobox.Option
             key={language.code + "preferred"}
             value={language.code}
-            checked={value === language.code}
+            defaultChecked={value === language.code}
           >
             {language.name}
           </Combobox.Option>
@@ -70,7 +70,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
           <Combobox.Option
             key={language.code}
             value={language.code}
-            checked={value === language.code}
+            defaultChecked={value === language.code}
           >
             {language.name}
           </Combobox.Option>

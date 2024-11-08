@@ -4,9 +4,11 @@ import { Mic, Pause } from "lucide-react";
 import { useAppStore } from "../../../hooks/appStore";
 import { LanguagePicker } from "../../language-picker/language-picker.component";
 import { useAutoTranslation } from "../../../hooks/useAutoTranslation.hook";
+import { SoundIcon } from "../../sound-icon/sound-icon.component";
 
 interface TranslatorFooterProps {
   user: User;
+  transcript: string;
   listening?: boolean;
   busy?: boolean;
   onClick?: () => void;
@@ -16,6 +18,7 @@ interface TranslatorFooterProps {
 
 export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
   user,
+  transcript,
   listening,
   busy,
   onClick,
@@ -36,6 +39,9 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
   const handleSelect = (value: string) => {
     setLanguage(user, value);
   };
+
+  console.log();
+
   return (
     <footer
       className={cx(
@@ -50,7 +56,7 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
         <Button
           size={isMaxSmallDevice ? "md" : "lg"}
           rounded
-          color="vattjom"
+          color={user === 1 ? "vattjom" : "juniskar"}
           iconButton
           className={cx(
             !isMaxSmallDevice ? "!h-54 !w-54 !max-w-54 !max-h-54" : ""
@@ -74,6 +80,7 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
           onSelect={handleSelect}
           rotate
           size={isMaxSmallDevice ? "sm" : "md"}
+          readOnly={true}
         />
       </div>
       <div
@@ -81,24 +88,26 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
           "hidden md:flex grow flex-col justify-center items-center gap-8 text-center"
         )}
       >
-        <Button
-          size={isMaxSmallDevice ? "md" : "lg"}
-          rounded
-          color="vattjom"
-          iconButton
-          className={cx(
-            !isMaxSmallDevice ? "!h-54 !w-54 !max-w-54 !max-h-54" : ""
-          )}
-          disabled={busy}
-          onClick={() => onClick()}
-        >
-          <Icon icon={listening ? <Pause /> : <Mic />} />
-        </Button>
+        {listening || transcript.length > 0 ? (
+          <SoundIcon user={user} />
+        ) : (
+          <Button
+            size={isMaxSmallDevice ? "md" : "lg"}
+            rounded
+            color={user === 1 ? "vattjom" : "juniskar"}
+            iconButton
+            className={cx(
+              !isMaxSmallDevice ? "!h-54 !w-54 !max-w-54 !max-h-54" : ""
+            )}
+            disabled={busy}
+            onClick={() => onClick()}
+          >
+            <Icon size="large" icon={<Mic />} />
+          </Button>
+        )}
         <span className="text-base text-body">
           {busy
             ? t("common:waiting_for_counterpart")
-            : listening
-            ? t("common:press_to_paus")
             : t("common:press_to_talk")}
         </span>
       </div>

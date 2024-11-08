@@ -1,18 +1,15 @@
 import {
-  Avatar,
   Button,
   FormControl,
   FormLabel,
   Header,
   Icon,
 } from "@sk-web-gui/react";
-import { ArrowRight } from "lucide-react";
-import { Card } from "../components/card/card.component";
+import { ArrowRight, TriangleAlert } from "lucide-react";
 import { LanguagePicker } from "../components/language-picker/language-picker.component";
 import { useAppStore } from "../hooks/appStore";
 import { useAutoTranslation } from "../hooks/useAutoTranslation.hook";
 import { useEffect } from "react";
-
 interface StartProps {
   onNext: () => void;
 }
@@ -37,56 +34,56 @@ export const Start: React.FC<StartProps> = ({ onNext }) => {
         wrapperClasses="py-12 w-full"
         className="max-w-content"
       ></Header>
-      <main className="max-w-content w-full flex flex-col mt-68 gap-80 px-24 md:px-40 pb-40 items-center">
+      <main className="max-w-content w-full flex flex-col mt-68 xs:gap-40 sm:gap-72 px-24 md:px-40 pb-40 items-center">
         <header className="w-full flex flex-col items-center gap-40 text-center">
           <h1 className="text-display-2-sm md:text-display-2-md xl:text-display-2-lg font-display">
-            {t("common:hi")}
+            {t("common:digital_interpreter")}
           </h1>
           <span className="text-h4-sm md:text-h4-md lg:text-h4-lg font-header">
             {t("common:choose_languages")}
           </span>
         </header>
-        <div className="flex gap-40 flex-wrap items-center w-full">
-          <Card className="bg-bjornstigen-background-100 grow shrink">
-            <div>
-              <Avatar initials="A" color="bjornstigen" rounded />
-            </div>
-            <FormControl className="max-w-full pr-32">
-              <FormLabel>{t("common:your_language")}</FormLabel>
-              <LanguagePicker
-                value={languages[1]}
-                onSelect={(value) => setLanguage(1, value)}
-              />
-            </FormControl>
-          </Card>
-          <Card className="bg-background-200 grow shrink">
-            <div>
-              <Avatar
-                initials="B"
-                className="text-light-primary bg-primary-surface "
-                color="primary"
-                rounded
-              />
-            </div>
-            <FormControl className="max-w-full pr-32">
-              <FormLabel>{t("common:counterpart_language")}</FormLabel>
-              <LanguagePicker
-                value={languages[2]}
-                onSelect={(value) => setLanguage(2, value)}
-              />
-            </FormControl>
-          </Card>
+        <div className="flex gap-40 flex-col max-w-[580px] items-center w-full">
+          <FormControl className="w-full">
+            <FormLabel className="text-vattjom-text">
+              {t("common:person_a")}
+            </FormLabel>
+            <LanguagePicker
+              value={languages[1]}
+              onSelect={(value) => setLanguage(1, value)}
+            />
+          </FormControl>
+
+          <FormControl className="w-full">
+            <FormLabel className="text-juniskar-text">
+              {t("common:person_b")}
+            </FormLabel>
+            <LanguagePicker
+              value={languages[2]}
+              onSelect={(value) => setLanguage(2, value)}
+            />
+          </FormControl>
         </div>
-        <Button
-          size="lg"
-          variant="primary"
-          color="vattjom"
-          rightIcon={<Icon icon={<ArrowRight />} />}
-          onClick={() => onNext && onNext()}
-          className="w-fit"
-        >
-          {t("common:start")}
-        </Button>
+        <div className="flex flex-col xs:gap-40 sm:gap-72">
+          <Button
+            size="lg"
+            variant="primary"
+            color="primary"
+            rightIcon={<Icon icon={<ArrowRight />} />}
+            onClick={() => onNext && onNext()}
+            className="max-w-[580px] w-full xs:order-last sm:order-first"
+          >
+            {t("common:start")}
+          </Button>
+
+          <div className="max-w-[580px] rounded-button px-24 pt-24 pb-32 w-full bg-warning-background-300">
+            <div className="flex gap-10 w-full justify-center items-center">
+              <Icon icon={<TriangleAlert />} />
+              <h2>{t("common:warning_headline")}</h2>
+            </div>
+            <p className="text-large text-center">{t("common:warning_text")}</p>
+          </div>
+        </div>
       </main>
     </div>
   );
