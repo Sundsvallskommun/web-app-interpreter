@@ -32,8 +32,6 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
     ),
   ];
 
-  console.log("lang", allLanguages.find((lng) => lng.code === value)?.name);
-
   return (
     <Combobox
       multiple={false}

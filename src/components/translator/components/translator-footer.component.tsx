@@ -40,8 +40,6 @@ export const TranslatorFooter: React.FC<TranslatorFooterProps> = ({
     setLanguage(user, value);
   };
 
-  console.log();
-
   return (
     <footer
       className={cx(
