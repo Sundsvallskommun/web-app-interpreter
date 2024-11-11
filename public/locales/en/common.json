@@ -15,5 +15,7 @@
   "press_to_talk": "Tap to talk",
 
   "warning_headline": "Warning",
-  "warning_text": " During the meeting, do not mention any personal information about yourself or anyone close to you."
+  "warning_text": " During the meeting, do not mention any personal information about yourself or anyone close to you.",
+  "restart_recording": "Restart recording",
+  "send_recording": "Send the recording"
 }

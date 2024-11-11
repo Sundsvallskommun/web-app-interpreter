@@ -20,12 +20,12 @@ export const Start: React.FC<StartProps> = ({ onNext }) => {
     state.setLanguage,
   ]);
 
-  const myLanguage = languages[1].split("-")[0];
+  const counterpartsLanguage = languages[2].split("-")[0];
   const { t, i18n } = useAutoTranslation();
 
   useEffect(() => {
-    i18n.changeLanguage(myLanguage);
-  }, [myLanguage, i18n]);
+    i18n.changeLanguage(counterpartsLanguage);
+  }, [counterpartsLanguage, i18n]);
 
   return (
     <div className="w-full h-screen flex flex-col p-0 m-0 items-center">
