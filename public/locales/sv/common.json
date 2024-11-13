@@ -15,5 +15,7 @@
   "press_to_talk": "Tryck för att spela in",
 
   "warning_headline": "Varning",
-  "warning_text": "Under mötet, nämn inga personliga uppgifter om dig själv eller någon i din närhet."
+  "warning_text": "Under mötet, nämn inga personliga uppgifter om dig själv eller någon i din närhet.",
+  "restart_recording": "Börja om inspelningen",
+  "send_recording": "Skicka inspelningen"
 }

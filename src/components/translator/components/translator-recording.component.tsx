@@ -1,4 +1,5 @@
 import { UserLanguage } from "@/src/hooks/appStore";
+import { useAutoTranslation } from "../../../hooks/useAutoTranslation.hook";
 import { User } from "@/src/types/user.type";
 import { textToSpeech } from "@sk-web-gui/ai";
 import { Button, Divider, Icon } from "@sk-web-gui/react";
@@ -45,6 +46,10 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
   listening,
   setBusy,
 }) => {
+  const { t } = useAutoTranslation("common", {
+    lng: languages[id].split("-")[0],
+  });
+
   const sendEntry = () => {
     if (transcript) {
       updateHistory(id, id, languages[id], transcript, messageId);
@@ -112,7 +117,7 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
               variant="tertiary"
               disabled={transcript.length === 0}
             >
-              Börja om inspelningen
+              {t("common:restart_recording")}
             </Button>
           </div>
           <Divider />
@@ -124,7 +129,7 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
               variant="primary"
               color={id === 1 ? "vattjom" : "juniskar"}
             >
-              Skicka
+              {t("common:send_recording")}
             </Button>
           </div>
         </div>
