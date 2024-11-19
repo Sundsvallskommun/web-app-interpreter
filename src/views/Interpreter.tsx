@@ -6,7 +6,7 @@ interface InterpreterProps {
 
 export const Interpreter: React.FC<InterpreterProps> = ({ onRestart }) => {
   return (
-    <main className="w-[100svw] h-[100svh] flex flex-col justify-between gap-40 max-h-[100svh] max-w-[100svw] overflow-hidden">
+    <main className="w-[100svw] h-[100svh] flex flex-col justify-between gap-40 max-h-[100svh] max-w-[100svw] overflow-hidden bg-primitives-gray-lightest dark:bg-black">
       <div className="h-1/2">
         <Translator id={2} />
       </div>

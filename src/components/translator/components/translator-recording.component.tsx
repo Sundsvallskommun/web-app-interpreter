@@ -70,7 +70,7 @@ export const TranslatorRecording: React.FC<TranslatorRecordningProps> = ({
 
   return (
     <div className="absolute z-50 flex justify-center pb-100 bg-transparent w-full bottom-0">
-      <div className="max-w-[770px] w-full h-fit p-16 mb-40 bg-white rounded-button shadow-50 flex flex-col gap-24">
+      <div className="max-w-[770px] w-full h-fit p-16 mb-40 bg-background-content dark:bg-background-100 rounded-button shadow-50 flex flex-col gap-24">
         <div className="flex justify-between gap-12">
           <div>
             <Button
